@@ -22,11 +22,9 @@ public class AlbumsUpdater {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ObjectReader objectReader;
-    private final BlobStore blobStore;
     private final AlbumsBean albumsBean;
 
-    public AlbumsUpdater(BlobStore blobStore, AlbumsBean albumsBean) {
-        this.blobStore = blobStore;
+    public AlbumsUpdater(AlbumsBean albumsBean) {
         this.albumsBean = albumsBean;
 
         CsvSchema schema = CsvSchema.builder()
@@ -40,19 +38,20 @@ public class AlbumsUpdater {
     }
 
     public void update() throws IOException {
-        Optional<Blob> maybeBlob = blobStore.get("albums.csv");
-
-        if (!maybeBlob.isPresent()) {
-            logger.info("No albums.csv found when running AlbumsUpdater!");
-            return;
-        }
-
-        List<Album> albumsToHave = readFromCsv(objectReader, maybeBlob.get().inputStream);
-        List<Album> albumsWeHave = albumsBean.getAlbums();
-
-        createNewAlbums(albumsToHave, albumsWeHave);
-        deleteOldAlbums(albumsToHave, albumsWeHave);
-        updateExistingAlbums(albumsToHave, albumsWeHave);
+//        Optional<Blob> maybeBlob = blobStore.get("albums.csv");
+//
+//        if (!maybeBlob.isPresent()) {
+//            logger.info("No albums.csv found when running AlbumsUpdater!");
+//            return;
+//        }
+//
+//        List<Album> albumsToHave = readFromCsv(objectReader, maybeBlob.get().inputStream);
+//        List<Album> albumsWeHave = albumsBean.getAlbums();
+//
+//        createNewAlbums(albumsToHave, albumsWeHave);
+//        deleteOldAlbums(albumsToHave, albumsWeHave);
+//        updateExistingAlbums(albumsToHave, albumsWeHave);
+        logger.debug("Reached to update and doing dummuy update");
     }
 
 
